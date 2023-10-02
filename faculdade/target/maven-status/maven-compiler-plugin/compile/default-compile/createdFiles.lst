@@ -5,6 +5,7 @@ com\ap1\faculdade\faculdade\FaculdadeApplication.class
 com\ap1\faculdade\faculdade\errorHandler\ErrorHandlerController.class
 com\ap1\faculdade\faculdade\repository\CursoRepository.class
 com\ap1\faculdade\faculdade\model\Curso.class
+com\ap1\faculdade\faculdade\ApiDocumentationConfiguration.class
 com\ap1\faculdade\faculdade\model\Aluno.class
 com\ap1\faculdade\faculdade\service\CursoService.class
 com\ap1\faculdade\faculdade\errorHandler\Validation.class
