@@ -2,6 +2,7 @@ package com.ap1.faculdade.faculdade.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Aluno {
     @NotBlank(message = "Campo nome do aluno não pode ser vazio")
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Curso curso;
 
     public Curso getCurso() {

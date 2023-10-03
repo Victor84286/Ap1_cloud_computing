@@ -55,9 +55,9 @@ class AlunoController {
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<Aluno> create(@PathVariable("id") long idPost, @Valid @RequestBody Aluno item) {
+    public ResponseEntity<Aluno> create(@PathVariable("id") long idCurso, @Valid @RequestBody Aluno item) {
         try {
-            Aluno savedItem = commentService.save(idPost, item);
+            Aluno savedItem = commentService.save(idCurso, item);
             return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);

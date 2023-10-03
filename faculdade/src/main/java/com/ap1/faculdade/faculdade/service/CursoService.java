@@ -52,6 +52,7 @@ public class CursoService {
 
     public void delete(long id) throws Exception {
         Optional<Curso> oldPost = this.postRepository.findById(id);
+        
         if(oldPost.isPresent() == false){
             throw new Exception("Não encontrei o post a ser atualizado");
         }
