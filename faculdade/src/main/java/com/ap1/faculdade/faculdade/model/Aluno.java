@@ -2,6 +2,8 @@ package com.ap1.faculdade.faculdade.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +28,8 @@ public class Aluno {
     @NotBlank(message = "Campo nome do aluno não pode ser vazio")
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JsonIgnore
     private Curso curso;
 
     public Curso getCurso() {

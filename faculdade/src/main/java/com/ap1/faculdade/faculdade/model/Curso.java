@@ -37,6 +37,10 @@ public class Curso {
     @NotBlank(message = "Campo texto do post não pode ser vazio")
     private String duracao;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private List<Aluno> alunos;
+
     public LocalDateTime getDtCriacao() {
         return dtCriacao;
     }
@@ -77,4 +81,15 @@ public class Curso {
         Id = id;
     }
 
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public void addAlunos(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
 }
