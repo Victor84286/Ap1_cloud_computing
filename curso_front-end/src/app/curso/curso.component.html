@@ -1,0 +1,7 @@
+<div class="curso_container" *ngIf="cursos && cursos.length > 0">
+    <div class="curso" *ngFor="let item of cursos">
+        <h2 id="curso_title">{{item.nome}}</h2>
+        <span>{{item.descricao}}</span>
+        <br/>
+    </div>
+</div>
