@@ -2,7 +2,9 @@ com\ap1\faculdade\faculdade\controller\CursoController.class
 com\ap1\faculdade\faculdade\errorHandler\ValidationErrorResponse.class
 com\ap1\faculdade\faculdade\repository\AlunoRepository.class
 com\ap1\faculdade\faculdade\FaculdadeApplication.class
+com\ap1\faculdade\faculdade\exception\CursoException.class
 com\ap1\faculdade\faculdade\errorHandler\ErrorHandlerController.class
+com\ap1\faculdade\faculdade\exception\BusinessException.class
 com\ap1\faculdade\faculdade\repository\CursoRepository.class
 com\ap1\faculdade\faculdade\model\Curso.class
 com\ap1\faculdade\faculdade\ApiDocumentationConfiguration.class
@@ -10,4 +12,6 @@ com\ap1\faculdade\faculdade\model\Aluno.class
 com\ap1\faculdade\faculdade\service\CursoService.class
 com\ap1\faculdade\faculdade\errorHandler\Validation.class
 com\ap1\faculdade\faculdade\service\AlunoService.class
+com\ap1\faculdade\faculdade\exception\AlunoException.class
 com\ap1\faculdade\faculdade\controller\AlunoController.class
+com\ap1\faculdade\faculdade\errorHandler\BusinessError.class

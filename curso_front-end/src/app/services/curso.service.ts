@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Curso } from '../model/curso.model';
+import { CursoModule } from '../model/curso/curso.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,11 @@ export class CursoService {
 
   constructor(private httpClient: HttpClient) {  }
 
-  public getCurso(): Observable<Curso[]> {
-    return this.httpClient.get<Curso[]> ('http://localhost:8080/curso')
+  public getCurso(): Observable<CursoModule[]> {
+    return this.httpClient.get<CursoModule[]> ('https://ibmec-ap1-cloud.azurewebsites.net/curso')
+  }
+
+  public getCursoById(id:any) : Observable<CursoModule[]> {
+    return this.httpClient.get<CursoModule[]> ('https://ibmec-ap1-cloud.azurewebsites.net/curso/'+ id)
   }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.ap1.faculdade.faculdade.exception.BusinessException;
+
 @ControllerAdvice
 public class ErrorHandlerController {
 
@@ -24,4 +26,12 @@ public class ErrorHandlerController {
         return result;
     }
 
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ValidationErrorResponse businessExceptionHandler(BusinessException e){
+        ValidationErrorResponse result = new ValidationErrorResponse();
+        result.getBusinessErrors().add(new BusinessError(e.getClass().getSimpleName(), e.getMessage()));
+        return result;
+    }
 }

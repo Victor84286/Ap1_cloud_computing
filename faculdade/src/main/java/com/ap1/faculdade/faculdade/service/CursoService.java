@@ -7,57 +7,59 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ap1.faculdade.faculdade.exception.CursoException;
 import com.ap1.faculdade.faculdade.model.Curso;
 import com.ap1.faculdade.faculdade.repository.CursoRepository;
 
 @Service
 public class CursoService {
     @Autowired
-    private CursoRepository postRepository;
+    private CursoRepository cursoRepository;
 
-    public Curso create(Curso post){
-        if(post.getDtCriacao() == null){
-            post.setDtCriacao(LocalDateTime.now());
+    public Curso create(Curso curso){
+        if(curso.getDtCriacao() == null){
+            curso.setDtCriacao(LocalDateTime.now());
         }
 
-        return this.postRepository.save(post);
+        return this.cursoRepository.save(curso);
     }
 
     public Optional<Curso> getById(long id){
-        return this.postRepository.findById(id);
+        return this.cursoRepository.findById(id);
     }
 
     public List<Curso> getAll() {
-        return this.postRepository.findAll();
+        return this.cursoRepository.findAll();
     }
 
     public void saveOrUpdate(Curso item){
-        this.postRepository.save(item);
+        this.cursoRepository.save(item);
     }
 
-    public Curso update(long id, Curso newData) throws Exception{
-        Optional<Curso> oldPost = this.postRepository.findById(id);
-        if(oldPost.isPresent() == false){
-            throw new Exception("Não encontrei o post a ser atualizado");
+    public Curso update(long id, Curso newData) throws CursoException{
+        Optional<Curso> oldCurso = this.cursoRepository.findById(id);
+        if(oldCurso.isPresent() == false){
+            throw new CursoException("Não encontrei o curso a ser atualizado");
         }
 
-        Curso post = oldPost.get();
-        post.setDescricao(newData.getDescricao());
-        post.setNome(newData.getNome());
-        post.setDuracao(newData.getDuracao());
+        Curso curso = oldCurso.get();
+        curso.setNome(newData.getNome());
+        curso.setDescricao(newData.getDescricao());
+        curso.setDuracao(newData.getDuracao());
+        curso.setDtCriacao(LocalDateTime.now());
 
-        this.postRepository.save(post);
-        return post;
+        this.cursoRepository.save(curso);
+        return curso;
     }
 
-    public void delete(long id) throws Exception {
-        Optional<Curso> oldPost = this.postRepository.findById(id);
-        
-        if(oldPost.isPresent() == false){
-            throw new Exception("Não encontrei o post a ser atualizado");
+    public void delete(long id) throws CursoException {
+        Optional<Curso> oldCurso = this.cursoRepository.findById(id);
+
+        if(oldCurso.isPresent() == false){
+            throw new CursoException("Não encontrei o curso a ser atualizado");
         }
 
-        this.postRepository.delete(oldPost.get());
+        this.cursoRepository.delete(oldCurso.get());
 
         }
 }

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,11 +21,11 @@ public class Aluno {
     private long id;
 
     @Column(nullable = false)
-    private LocalDateTime dtMatricula;
+    @NotBlank(message = "Campo texto do comentario não pode ser vazio")
+    private String nome;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo nome do aluno não pode ser vazio")
-    private String nome;
+    private LocalDateTime dtMatricula;
 
     @ManyToOne
     @JsonIgnore
@@ -35,27 +34,32 @@ public class Aluno {
     public Curso getCurso() {
         return curso;
     }
+
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+
     public LocalDateTime getDtMatricula() {
         return dtMatricula;
     }
+
     public void setDtMatricula(LocalDateTime dtMatricula) {
         this.dtMatricula = dtMatricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-
 }

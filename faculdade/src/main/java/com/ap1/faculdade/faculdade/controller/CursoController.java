@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ap1.faculdade.faculdade.exception.CursoException;
 import com.ap1.faculdade.faculdade.model.Curso;
 import com.ap1.faculdade.faculdade.service.CursoService;
+
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/curso")
+@CrossOrigin
 class CursoController {
 
     @Autowired
@@ -30,7 +34,7 @@ class CursoController {
     @GetMapping
     public ResponseEntity<List<Curso>> getAll() {
         try {
-            List<Curso> items = new ArrayList<Curso>();
+            List<Curso> items = new ArrayList<>();
 
             cursoService.getAll().forEach(items::add);
 
@@ -56,30 +60,18 @@ class CursoController {
 
     @PostMapping
     public ResponseEntity<Curso> create(@Valid @RequestBody Curso item) {
-        try {
-            Curso savedItem = cursoService.create(item);
-            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-        }
+        Curso savedItem = cursoService.create(item);
+        return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Curso> update(@PathVariable("id") long id, @Valid @RequestBody Curso item) {
-        try {
-            return new ResponseEntity<>(cursoService.update(id, item), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<Curso> update(@PathVariable("id") long id, @Valid @RequestBody Curso item) throws CursoException {
+        return new ResponseEntity<>(cursoService.update(id, item), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
-        try {
-            this.cursoService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) throws CursoException {
+        cursoService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

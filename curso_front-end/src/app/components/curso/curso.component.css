@@ -1,0 +1,34 @@
+.container_cards {
+    width: 40vw;
+    justify-content: left;
+}
+
+.container_card {
+    background-color: white;
+    border: 0;
+}
+
+.card {
+
+    width: 20vw;
+    background-color: #3f51b5;
+    color: white;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.nome_curso {
+    width: 20vw;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.descricao_curso {
+    font-size: 18px;
+}
+
+.nome_aluno {
+    width: 20vw;
+    border-top: 1px solid black;
+}

@@ -20,10 +20,9 @@ import jakarta.validation.constraints.NotBlank;
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo nome do curso não pode ser vazio")
     private String nome;
 
     @Column(nullable = false)
@@ -34,19 +33,31 @@ public class Curso {
     private String descricao;
 
     @Column(nullable = false)
-    @NotBlank(message = "Campo texto do post não pode ser vazio")
+    @NotBlank(message = "Campo duracao do curso não pode ser vazio")
     private String duracao;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private List<Aluno> alunos;
+    @JoinColumn(name = "curso_id")
+    private List<Aluno> alunosMatriculados;
 
-    public LocalDateTime getDtCriacao() {
-        return dtCriacao;
+    public void addAlunoMatriculado(Aluno aluno){
+        this.alunosMatriculados.add(aluno);
     }
 
-    public void setDtCriacao(LocalDateTime dtCriacao) {
-        this.dtCriacao = dtCriacao;
+    public List<Aluno> getAlunosMatriculados() {
+        return alunosMatriculados;
+    }
+
+    public void setAlunosMatriculados(List<Aluno> alunosMatriculados) {
+        this.alunosMatriculados = alunosMatriculados;
+    }
+
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
     }
 
     public String getDescricao() {
@@ -57,12 +68,12 @@ public class Curso {
         this.descricao = descricao;
     }
 
-    public String getDuracao() {
-        return duracao;
+    public LocalDateTime getDtCriacao() {
+        return dtCriacao;
     }
 
-    public void setDuracao(String duracao) {
-        this.duracao = duracao;
+    public void setDtCriacao(LocalDateTime dtCriacao) {
+        this.dtCriacao = dtCriacao;
     }
 
     public String getNome() {
@@ -74,22 +85,10 @@ public class Curso {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
-    }
-
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public void addAlunos(Aluno aluno) {
-        this.alunos.add(aluno);
+        this.id = id;
     }
 }

@@ -1,0 +1,74 @@
+.container_body {
+    display: grid;
+    grid-template-areas: "blank1 conteudo blank2";
+    grid-template-columns: auto 20vw auto;
+}
+
+.container_card {
+    grid-area: conteudo;
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.link_home {
+    margin-top: 5px;
+
+    width: 10vw;
+    border: 5px solid black;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: rebeccapurple;
+    font-size: 20px;
+    background-color: black;
+}
+
+.card {
+    border-radius: 15px;
+    background-color: #3f51b5;
+    color: white;
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+.nome_curso {
+    padding-left: 5px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.descricao_curso {
+    padding-left: 5px;
+    font-size: 18px;
+
+}
+
+.duracao_curso {
+    padding-left: 5px;
+}
+
+.dtCriacao_curso {
+    padding-left: 5px;
+}
+
+.escrita_alunos {
+    padding-left: 5px;
+}
+
+.alunos_curso { }
+
+.nome_aluno {
+    padding-left: 5px;
+    width: 20vw;
+    border-top: 1px solid black;
+}
+
+.dtMatricula_aluno {
+    padding-left: 5px;
+}

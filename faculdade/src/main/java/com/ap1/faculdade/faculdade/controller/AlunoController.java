@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,23 +17,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ap1.faculdade.faculdade.exception.AlunoException;
 import com.ap1.faculdade.faculdade.model.Aluno;
 import com.ap1.faculdade.faculdade.service.AlunoService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/aluno")
+@CrossOrigin
 class AlunoController {
 
     @Autowired
-    AlunoService commentService;
+    AlunoService alunoService;
 
     @GetMapping
     public ResponseEntity<List<Aluno>> getAll() {
         try {
             List<Aluno> items = new ArrayList<Aluno>();
 
-            commentService.findAll().forEach(items::add);
+            alunoService.findAll().forEach(items::add);
 
             if (items.isEmpty())
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,7 +48,7 @@ class AlunoController {
 
     @GetMapping("{id}")
     public ResponseEntity<Aluno> getById(@PathVariable("id") long id) {
-        Optional<Aluno> existingItemOptional = commentService.findById(id);
+        Optional<Aluno> existingItemOptional = alunoService.findById(id);
 
         if (existingItemOptional.isPresent()) {
             return new ResponseEntity<>(existingItemOptional.get(), HttpStatus.OK);
@@ -55,31 +58,20 @@ class AlunoController {
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<Aluno> create(@PathVariable("id") long idCurso, @Valid @RequestBody Aluno item) {
-        try {
-            Aluno savedItem = commentService.save(idCurso, item);
-            return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<Aluno> create(@PathVariable("id") long idCurso, @Valid @RequestBody Aluno item) throws AlunoException{
+        Aluno savedItem = alunoService.save(idCurso, item);
+        return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Aluno> update(@PathVariable("id") long id, @Valid @RequestBody Aluno item) {
-        try {
-            return new ResponseEntity<>(commentService.update(id, item), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<Aluno> update(@PathVariable("id") long id, @Valid @RequestBody Aluno item) throws AlunoException {
+        return new ResponseEntity<>(alunoService.update(id, item), HttpStatus.OK);
     }
 
+
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
-        try {
-            commentService.delete(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) throws AlunoException {
+        alunoService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,0 +1,17 @@
+<div class="container_body">
+    <div class="container_card">
+        <a class="link_home" routerLink="/home">Home</a>
+
+        <div class="card">
+            <p class="nome_curso">{{curso.nome}}</p>
+            <p class="descricao_curso">{{curso.descricao}}</p>
+            <p class="duracao_curso">Duração do curso: {{curso.duracao}} horas</p>
+            <p class="dtCriacao_curso"> Foi criado em {{curso.dtCriacao?.toString()?.split("T")?.at(0)}}</p>
+            <p class="escrita_alunos">Alunos:</p>
+            <div class="alunos_curso" *ngFor="let aluno of curso.alunosMatriculados">
+                <p class="nome_aluno">Nome: {{aluno.nome}}</p>
+                <p class="dtMatricula_aluno">Matrícula feita em: {{aluno.dtMatricula?.toString()?.split("T")?.at(0)}}</p>
+            </div>
+        </div>
+    </div>
+</div>
